@@ -6,7 +6,6 @@ import team3.gestorincidentesapplication.Cliente;
 import team3.repositorys.ClienteRepository;
 
 
-//Gestor de cliente
 @Service
 public class ClienteService {
 
@@ -14,6 +13,7 @@ public class ClienteService {
 
     @Autowired
     public ClienteService(ClienteRepository clienteRepository) {
+
         this.clienteRepository = clienteRepository;
     }
 
