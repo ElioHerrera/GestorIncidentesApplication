@@ -2,7 +2,6 @@ package team3.gestorincidentesapplication;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
 import javax.persistence.*;
 import java.util.List;
 
