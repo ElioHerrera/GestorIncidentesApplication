@@ -7,5 +7,7 @@ Trabajo Práctico Integrador
 Integrantes GRUPO 3:
                * Elio Herrera
                *
+               * Victor H. Estrada
+               *
                *
       
