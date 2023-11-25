@@ -52,7 +52,7 @@ public class GestorIncidentesApplication {
 
             System.out.println(servicio.getNombre());
 
-
+         // tabla creada
         };
     }
 
