@@ -58,22 +58,32 @@ public class GestorIncidentesApplication {
             Servicio servicio3 = new Servicio(3,"Servicio 3", "Descripción Servicio 3");
             Servicio servicio4 = new Servicio(4,"Servicio 4", "Descripción Servicio 4");
 
-
-
-            // Vincular servicios a clientes
-            cliente1.agregarServicio(servicio1); //SE BORRA
-            cliente1.agregarServicio(servicio2); //SETEA
-            cliente2.agregarServicio(servicio4);
-            cliente3.agregarServicio(servicio3);
-            cliente4.agregarServicio(servicio3); //SE BORRA
-            cliente4.agregarServicio(servicio1); //SETEA
-            cliente4.agregarServicio(servicio2); //NUEVO SETEA
-
-            // Guardar servicios después de vincularlos
             servicioService.guardarServicio(servicio1);
             servicioService.guardarServicio(servicio2);
             servicioService.guardarServicio(servicio3);
             servicioService.guardarServicio(servicio4);
+
+            // Vincular servicios a clientes
+            cliente1.agregarServicio(servicio1);
+            cliente1.agregarServicio(servicio2);
+            cliente2.agregarServicio(servicio4);
+            cliente3.agregarServicio(servicio3);
+            cliente4.agregarServicio(servicio3);
+            cliente4.agregarServicio(servicio1);
+            cliente4.agregarServicio(servicio2);
+
+
+            cliente1.setId(clienteService.guardarCliente(cliente1));
+            cliente2.setId(clienteService.guardarCliente(cliente2));
+            cliente3.setId(clienteService.guardarCliente(cliente3));
+            cliente4.setId(clienteService.guardarCliente(cliente4));
+
+
+            // Guardar servicios después de vincularlos
+            /*servicioService.guardarServicio(servicio1);
+            servicioService.guardarServicio(servicio2);
+            servicioService.guardarServicio(servicio3);
+            servicioService.guardarServicio(servicio4);*/
             // ... (guardar otros servicios)
 
 
