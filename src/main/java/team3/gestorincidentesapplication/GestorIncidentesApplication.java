@@ -10,4 +10,6 @@ public class GestorIncidentesApplication {
         SpringApplication.run(GestorIncidentesApplication.class, args);
     }
 
+    
+
 }
