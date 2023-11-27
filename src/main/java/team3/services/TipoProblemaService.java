@@ -16,8 +16,9 @@ public class TipoProblemaService {
     }
 
     // Ejemplo de método en el servicio para guardar un nuevo cliente
-    public void guardarCliente(TipoProblema tipoProblema) {
+    public void guardarProblema(TipoProblema tipoProblema) {
 
         tipoProblemaRepository.save(tipoProblema);
     }
+
 }

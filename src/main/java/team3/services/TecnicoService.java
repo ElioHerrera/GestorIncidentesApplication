@@ -15,7 +15,7 @@ public class TecnicoService {
     }
 
     // Ejemplo de método en el servicio para guardar un nuevo tecnico
-    public void guardarCliente(Tecnico tecnico) {
+    public void guardarTecnico(Tecnico tecnico) {
 
         tecnicoRepository.save(tecnico);
     }

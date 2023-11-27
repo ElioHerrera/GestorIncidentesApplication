@@ -1,15 +1,18 @@
 package team3.gestorincidentesapplication;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.experimental.FieldDefaults;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "tipo_problema")
 @Data
+@AllArgsConstructor
+@Setter
 
 public class TipoProblema {
     @Id
@@ -26,4 +29,11 @@ public class TipoProblema {
             joinColumns = @JoinColumn(name = "id_tipo_problema"),
             inverseJoinColumns = @JoinColumn(name = "id_especialidad"))
     private List<Especialidad> especialidades;
+
+    public TipoProblema(int id,String tipo,int tiempoEstimado, int tiempoMaximo) {
+        this.id = id;
+        this.tipo = tipo;
+        this.tiempoEstimado = tiempoEstimado;
+        this.tiempoMaximo = tiempoMaximo;
+    }
 }
