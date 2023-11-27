@@ -3,6 +3,7 @@ package team3.gestorincidentesapplication;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +39,28 @@ public class Incidente {
     @ManyToOne
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "id_tecnico", referencedColumnName = "id")
+    private Tecnico tecnico;
+
+    @ManyToOne
+    @JoinColumn(name = "id_servicio", referencedColumnName = "id")
+    private Servicio servicio;
+
+    @ManyToOne
+    @JoinColumn(name = "id_tipoProblema", referencedColumnName = "id")
+    private TipoProblema tipoProblema;
+
+    @ManyToOne
+    @JoinColumn(name = "id_especialidad", referencedColumnName = "id")
+    private Especialidad especialidad;
+
+    // Se supone que con esta relacion de Uno a muchos con problemas podiamos hacer la consigna 2
+    // Alta de incidentes con problemas relacionados. Alta de incidentes con conjunto de problemas relacionados.
+    @OneToMany(mappedBy = "incidente", cascade = CascadeType.ALL);
+    private List<TipoProblema> tipoProblemas = new ArrayList<>();
+
 
     /*
 

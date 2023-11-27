@@ -17,7 +17,7 @@ public class IncidenteService {
     }
 
     // Ejemplo de método en el servicio para guardar un nuevo cliente
-    public void guardarCliente(Incidente incidente) {
+    public void guardarIncidente(Incidente incidente) {
         incidenteRepository.save(incidente);
     }
 
