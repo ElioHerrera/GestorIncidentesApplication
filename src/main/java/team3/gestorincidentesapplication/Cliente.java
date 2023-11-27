@@ -21,6 +21,7 @@ public class Cliente {
     private String razonSocial;
     private String nombre;
     private String apellido;
+   // private Incidente incidente;
 
 
     //@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -29,6 +30,9 @@ public class Cliente {
             joinColumns = @JoinColumn(name = "cliente_id"),
             inverseJoinColumns = @JoinColumn(name = "servicio_id"))
     private List<Servicio> serviciosContratados = new ArrayList<>(); // Inicializa la lista directamente
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Incidente> incidentes = new ArrayList<>();
 
     // Constructor sin parámetros (necesario para JPA)
     public Cliente() {
@@ -48,6 +52,11 @@ public class Cliente {
         serviciosContratados.add(servicio);
         servicio.getClientes().add(this);
         System.out.println("Servicio agregado a Cliente: " + this.id);
+    }
+    public void agregarIncidente(Incidente incidente) {
+        incidentes.add(incidente);
+        incidente.setCliente(this); // Establecer la relación bidireccional
+        System.out.println("Incidente agregado a Cliente: " + this.id);
     }
 
 

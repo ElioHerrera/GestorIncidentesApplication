@@ -26,6 +26,11 @@ public class MedioComunicacion {
     @JoinColumn(name = "id_tecnico", referencedColumnName = "id")
     private Tecnico tecnico;
 
-    public MedioComunicacion(int id, MedioEnum medio, String contacto) {
+    public MedioComunicacion(MedioEnum medio, String contacto) {
+        this.medio = medio;
+        this.contacto = contacto;
+    }
+
+    public MedioComunicacion() {
     }
 }

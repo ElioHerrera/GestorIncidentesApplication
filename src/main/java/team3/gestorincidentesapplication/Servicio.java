@@ -25,6 +25,8 @@ public class Servicio {
     @ManyToMany(mappedBy = "serviciosContratados")
     private List<Cliente> clientes = new ArrayList<>(); // Inicializa la lista directamente
 
+
+
     // Constructor con parámetros
     public Servicio(String nombre, String descripcion) {
         this.id = id;

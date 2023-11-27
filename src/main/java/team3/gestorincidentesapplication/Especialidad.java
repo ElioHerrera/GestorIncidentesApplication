@@ -27,9 +27,14 @@ public class Especialidad{
             name = "problema_especialidad",
             joinColumns = @JoinColumn(name = "id_problema"),
             inverseJoinColumns = @JoinColumn(name = "id_especialidad"))
-    private List<Especialidad> especialidades;}
 
-    public Especialidad(int id, String nombre, String descripcion) {
+    private List<Especialidad> especialidades;
+
+    public Especialidad(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+    public Especialidad() {
     }
 
 }
