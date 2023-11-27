@@ -19,17 +19,12 @@ public class Servicio {
     private String nombre;
     private String descripcion;
 
-
-
-
     @ManyToMany(mappedBy = "serviciosContratados")
     private List<Cliente> clientes = new ArrayList<>(); // Inicializa la lista directamente
 
-
-
     // Constructor con parámetros
     public Servicio(String nombre, String descripcion) {
-        this.id = id;
+        //this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }

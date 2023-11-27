@@ -18,13 +18,15 @@ public class IncidenteService {
 
     // Ejemplo de método en el servicio para guardar un nuevo cliente
     public void guardarCliente(Incidente incidente) {
-
         incidenteRepository.save(incidente);
     }
 
+    /*
     public void guardarIncidente(Incidente incidente) {
         System.out.println("incidente guardado a cliente: " + incidente.getCliente());
         incidenteRepository.save(incidente);
         System.out.println("Incidente guardado exitosamente");
     }
+
+     */
 }

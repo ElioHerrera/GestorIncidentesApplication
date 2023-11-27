@@ -2,6 +2,7 @@ package team3.gestorincidentesapplication;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import team3.services.IncidenteService;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -31,8 +32,23 @@ public class Cliente {
             inverseJoinColumns = @JoinColumn(name = "servicio_id"))
     private List<Servicio> serviciosContratados = new ArrayList<>(); // Inicializa la lista directamente
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Incidente> incidentes = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", cuit=" + cuit +
+                ", email='" + email + '\'' +
+                ", razonSocial='" + razonSocial + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                // Excluye la representación de las relaciones para evitar el bucle infinito
+                ", serviciosContratados=" + "excluido" +
+                ", incidentes=" + "excluido" +
+                '}';
+    }
 
     // Constructor sin parámetros (necesario para JPA)
     public Cliente() {
@@ -40,7 +56,7 @@ public class Cliente {
 
     // Constructor con parámetros
     public Cliente(long cuit, String email, String razonSocial, String nombre, String apellido) {
-        this.id = id;
+        //this.id = id;
         this.cuit = cuit;
         this.email = email;
         this.razonSocial = razonSocial;
@@ -49,14 +65,15 @@ public class Cliente {
     }
 
     public void agregarServicio(Servicio servicio) {
-        serviciosContratados.add(servicio);
-        servicio.getClientes().add(this);
-        System.out.println("Servicio agregado a Cliente: " + this.id);
+        serviciosContratados.add(servicio); // Agrega el servicio a la lista del cliente
+        servicio.getClientes().add(this); // Agrega el cliente a la lista de clientes del servicio
+        System.out.println("Servicio " + servicio.getNombre() + " agregado a Cliente: " + this.nombre);
     }
     public void agregarIncidente(Incidente incidente) {
-        incidentes.add(incidente);
-        incidente.setCliente(this); // Establecer la relación bidireccional
-        System.out.println("Incidente agregado a Cliente: " + this.id);
+        //incidente.actualizarEstadoSegunFecha(); // Actualizar estado antes de persistir
+        incidentes.add(incidente); // Agrega el incidente a la lista de incidentes del cliente
+        incidente.setCliente(this); // Aasocia el incidente con su único cliente
+        System.out.println("Incidente " + incidente.getTitulo() + " agregado a Cliente: " + this.nombre);
     }
 
 
