@@ -1,5 +1,6 @@
 package team3.gestorincidentesapplication;
 
+import lombok.Data;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import team3.services.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -24,14 +26,16 @@ public class GestorIncidentesApplication {
     private final TipoProblemaService tipoProblemaService;
     private final EspecialidadService especialidadService;
     private final TecnicoService tecnicoService;
+    private final IncidenteService incidenteService;
 
     @Autowired
-    public GestorIncidentesApplication(ClienteService clienteService, ServicioService servicioService, TipoProblemaService tipoProblemaService, EspecialidadService especialidadService, TecnicoService tecnicoService) {
+    public GestorIncidentesApplication(ClienteService clienteService, ServicioService servicioService, TipoProblemaService tipoProblemaService, EspecialidadService especialidadService, TecnicoService tecnicoService, IncidenteService incidenteService) {
         this.clienteService = clienteService;
         this.servicioService = servicioService;
         this.tipoProblemaService = tipoProblemaService;
         this.especialidadService = especialidadService;
         this.tecnicoService = tecnicoService;
+        this.incidenteService = incidenteService;
     }
 
 
@@ -44,6 +48,20 @@ public class GestorIncidentesApplication {
     public CommandLineRunner commandLineRunner() {
         return args -> {
 
+            Cliente cliente1 = new Cliente(111111, "cliente1@team3.com", "Razón Social 1", "Cliente 1", "Apellido 1");
+
+            Incidente incidente1 = new Incidente("sss","dessss",EstadoEnum.INCOMPLETO,"SS");
+
+            incidente1.agregarCliente(cliente1);
+            cliente1.agregarServicio(new Servicio("Servicio 1", "Descripción Servicio 1"));
+
+            incidenteService.guardarIncidente(incidente1);
+
+
+
+
+
+            /*
             // Crear y guardar clientes
             Cliente cliente1 = new Cliente(111111, "cliente1@team3.com", "Razón Social 1", "Cliente 1", "Apellido 1");
             Cliente cliente2 = new Cliente(222222, "cliente2@team3.com", "Razón Social 2", "Cliente 2", "Apellido 2");
@@ -61,45 +79,21 @@ public class GestorIncidentesApplication {
             cliente4.agregarServicio(new Servicio("Servicio 2", "Descripción Servicio 2"));
 
 
+
             // Guardar clientes junto a sus servicios en la base de datos
             clienteService.guardarCliente(cliente1);
-            clienteService.guardarCliente(cliente2);
-            clienteService.guardarCliente(cliente3);
-            clienteService.guardarCliente(cliente4);
-            System.out.println("fin ");
+            //clienteService.guardarCliente(cliente2);
+            //clienteService.guardarCliente(cliente3);
+            //clienteService.guardarCliente(cliente4);
 
 
-           /* // Crear y guardar servicios
-            Servicio servicio1 = new Servicio(1,"Servicio 1", "Descripción Servicio 1");
-            Servicio servicio2 = new Servicio(2,"Servicio 2", "Descripción Servicio 2");
-            Servicio servicio3 = new Servicio(3,"Servicio 3", "Descripción Servicio 3");
-            Servicio servicio4 = new Servicio(4,"Servicio 4", "Descripción Servicio 4");
+            System.out.println(" ********* TABLA CLIENTES Y SERVICIOS CREADA ********* ");
 
-            servicioService.guardarServicio(servicio1);
-            servicioService.guardarServicio(servicio2);
-            servicioService.guardarServicio(servicio3);
-            servicioService.guardarServicio(servicio4);
-
-            // Vincular servicios a clientes
-            cliente1.agregarServicio(servicio1);
-            cliente1.agregarServicio(servicio2);
-            cliente2.agregarServicio(servicio4);
-            cliente3.agregarServicio(servicio3);
-            cliente4.agregarServicio(servicio3);
-            cliente4.agregarServicio(servicio1);
-            cliente4.agregarServicio(servicio2);
-
-            cliente1.setId(clienteService.guardarCliente(cliente1));
-            cliente2.setId(clienteService.guardarCliente(cliente2));
-            cliente3.setId(clienteService.guardarCliente(cliente3));
-            cliente4.setId(clienteService.guardarCliente(cliente4));*/
-
-
-            TipoProblema problema1 = new TipoProblema(1,"Problema 1",48,96);
-            TipoProblema problema2 = new TipoProblema(2,"Problema 2",24,48);
-            TipoProblema problema3 = new TipoProblema(3,"Problema 3",48,96);
-            TipoProblema problema4 = new TipoProblema(4,"Problema 4",100,200);
-            TipoProblema problema5 = new TipoProblema(5,"Problema 5",80,1000);
+            TipoProblema problema1 = new TipoProblema("Problema 1",48,96);
+            TipoProblema problema2 = new TipoProblema("Problema 2",24,48);
+            TipoProblema problema3 = new TipoProblema("Problema 3",48,96);
+            TipoProblema problema4 = new TipoProblema("Problema 4",100,200);
+            TipoProblema problema5 = new TipoProblema("Problema 5",80,1000);
 
             tipoProblemaService.guardarProblema(problema1);
             tipoProblemaService.guardarProblema(problema2);
@@ -107,12 +101,14 @@ public class GestorIncidentesApplication {
             tipoProblemaService.guardarProblema(problema4);
             tipoProblemaService.guardarProblema(problema5);
 
+            System.out.println(" ********* TABLA PROBEMAS CREADA ********* ");
 
-            Especialidad especialidad1 = new Especialidad(1,"Especialidad 1","Descripcion 1");
-            Especialidad especialidad2 = new Especialidad(2,"Especialidad 2","Descripcion 2");
-            Especialidad especialidad3 = new Especialidad(3,"Especialidad 3","Descripcion 3");
-            Especialidad especialidad4 = new Especialidad(4,"Especialidad 4","Descripcion 4");
-            Especialidad especialidad5 = new Especialidad(5,"Especialidad 5","Descripcion 5");
+            Especialidad especialidad1 = new Especialidad("Especialidad 1","Descripcion 1");
+            Especialidad especialidad2 = new Especialidad("Especialidad 2","Descripcion 2");
+            Especialidad especialidad3 = new Especialidad("Especialidad 3","Descripcion 3");
+            Especialidad especialidad4 = new Especialidad("Especialidad 4","Descripcion 4");
+            Especialidad especialidad5 = new Especialidad("Especialidad 5","Descripcion 5");
+
 
             especialidadService.guardarEspecialidad(especialidad1);
             especialidadService.guardarEspecialidad(especialidad2);
@@ -120,8 +116,8 @@ public class GestorIncidentesApplication {
             especialidadService.guardarEspecialidad(especialidad4);
             especialidadService.guardarEspecialidad(especialidad5);
 
-            MedioComunicacion medio1 = new MedioComunicacion(1, MedioEnum.EMAIL, "asd@gmail.com");
-            MedioComunicacion medio2 = new MedioComunicacion(1, MedioEnum.WHATSAPP, "telefono");
+            MedioComunicacion medio1 = new MedioComunicacion( MedioEnum.EMAIL, "asd@gmail.com");
+            MedioComunicacion medio2 = new MedioComunicacion( MedioEnum.WHATSAPP, "telefono");
 
             Tecnico tecnico1 = new Tecnico("Tecnico 1", "el uno");
             Tecnico tecnico2 = new Tecnico("Tecnico 2", "francia");
@@ -134,6 +130,7 @@ public class GestorIncidentesApplication {
             tecnicoService.guardarTecnico(tecnico3);
             tecnicoService.guardarTecnico(tecnico4);
             tecnicoService.guardarTecnico(tecnico5);
+            */
 
         };
     }

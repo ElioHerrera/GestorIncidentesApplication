@@ -30,10 +30,22 @@ public class TipoProblema {
             inverseJoinColumns = @JoinColumn(name = "id_especialidad"))
     private List<Especialidad> especialidades;
 
-    public TipoProblema(int id,String tipo,int tiempoEstimado, int tiempoMaximo) {
+    public TipoProblema(String tipo,int tiempoEstimado, int tiempoMaximo) {
         this.id = id;
         this.tipo = tipo;
         this.tiempoEstimado = tiempoEstimado;
         this.tiempoMaximo = tiempoMaximo;
     }
-}
+    public TipoProblema() {
+
+    }
+    /*
+    public void agregarEspecialidad(Especialidad especialidad) {
+        especialidades.add(especialidad);
+        especialidad.getTipoProblema().add(this);
+        System.out.println("Servicio agregado a Cliente: " + this.id);
+    }
+
+
+ */
+    }

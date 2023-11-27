@@ -32,7 +32,15 @@ public class Incidente {
 
     private String consideraciones;
 
-    @ManyToMany
+
+
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id")
+    private Cliente cliente;
+
+/*
+
+@ManyToMany
     @JoinTable(
             name = "incidente_tipo_problema",
             joinColumns = @JoinColumn(name = "id_incidente"),
@@ -40,18 +48,36 @@ public class Incidente {
     private List<TipoProblema> tipoProblemas;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente", referencedColumnName = "id")
-    private Cliente cliente;
-
-    @ManyToOne
     @JoinColumn(name = "id_tecnico", referencedColumnName = "id")
     private Tecnico tecnico;
 
-    @ManyToOne
+        @ManyToOne
     @JoinColumn(name = "id_servicio", referencedColumnName = "id")
     private Servicio servicio;
 
     @ManyToOne
     @JoinColumn(name = "id_especialidad", referencedColumnName = "id")
     private Especialidad especialidad;
+*/
+    public Incidente(String titulo, String descripcion, EstadoEnum estado, String consideraciones) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        //this.fechaIngreso = fechaIngreso;
+        //this.fechaEstimadaResolucion = fechaEstimadaResolucion;
+        //this.fechaResolucion = fechaResolucion;
+        this.estado = estado;
+        this.consideraciones = consideraciones;
+    }
+    public Incidente(){
+    }
+
+
+    public void agregarCliente(Cliente cliente) {
+        this.cliente = cliente;
+        cliente.getIncidentes().add(this); // Agregar este incidente a la lista de incidentes del cliente
+        System.out.println("Cliente agregado");
+    }
+
+
 }
