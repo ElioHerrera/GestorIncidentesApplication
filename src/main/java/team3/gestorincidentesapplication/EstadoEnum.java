@@ -1,7 +1,7 @@
 package team3.gestorincidentesapplication;
 
 public enum EstadoEnum {
-    INCOMPLETO,
+    //INCOMPLETO,
     EN_PROCESO,
     FINALIZADO
 }

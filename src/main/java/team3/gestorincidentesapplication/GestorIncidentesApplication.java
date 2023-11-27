@@ -49,14 +49,27 @@ public class GestorIncidentesApplication {
         return args -> {
 
             Cliente cliente1 = new Cliente(111111, "cliente1@team3.com", "Razón Social 1", "Cliente 1", "Apellido 1");
+            Cliente cliente2 = new Cliente(222222, "cliente2@team3.com", "Razón Social 2", "Cliente 2", "Apellido 2");
 
-            Incidente incidente1 = new Incidente("sss","dessss",EstadoEnum.INCOMPLETO,"SS");
-
-            incidente1.agregarCliente(cliente1);
             cliente1.agregarServicio(new Servicio("Servicio 1", "Descripción Servicio 1"));
+            cliente1.agregarServicio(new Servicio("Servicio 2", "Descripción Servicio 2"));
+            cliente1.agregarServicio(new Servicio("Servicio 3", "Descripción Servicio 3"));
+            cliente1.agregarIncidente(new Incidente("Incidente 2", "Sin Internet", "SS"));
 
-            incidenteService.guardarIncidente(incidente1);
+            System.out.println("cliente y servicio guardado");
 
+
+            cliente2.agregarServicio(new Servicio("Servicio 2", "Descripción Servicio 2"));
+            cliente2.agregarIncidente(new Incidente("Incidente 1", "Windows desactualizado", "SS"));
+
+            clienteService.guardarCliente(cliente1);
+            clienteService.guardarCliente(cliente2);
+
+
+
+        };
+    }
+}
 
 
 
@@ -132,6 +145,3 @@ public class GestorIncidentesApplication {
             tecnicoService.guardarTecnico(tecnico5);
             */
 
-        };
-    }
-}
