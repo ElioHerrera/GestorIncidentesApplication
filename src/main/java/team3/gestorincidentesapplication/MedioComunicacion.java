@@ -1,5 +1,6 @@
 package team3.gestorincidentesapplication;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 @Entity
 @Table(name = "medio_comunicacion")
 @Data
+@AllArgsConstructor
 
 public class MedioComunicacion {
     @Id
@@ -23,4 +25,7 @@ public class MedioComunicacion {
     @ManyToOne
     @JoinColumn(name = "id_tecnico", referencedColumnName = "id")
     private Tecnico tecnico;
+
+    public MedioComunicacion(int id, MedioEnum medio, String contacto) {
+    }
 }

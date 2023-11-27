@@ -28,4 +28,8 @@ public class Tecnico {
 
     @OneToMany(mappedBy = "tecnico")
     private List<MedioComunicacion> mediosComunicacion;
-}
+
+    public Tecnico(String nombre, String apellido) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+}}

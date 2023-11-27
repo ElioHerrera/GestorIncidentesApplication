@@ -12,6 +12,52 @@ import java.util.List;
 @Table(name = "cliente")
 @Data
 @AllArgsConstructor
+public class Cliente {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private long cuit;
+    private String email;
+    private String razonSocial;
+    private String nombre;
+    private String apellido;
+
+
+    //@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "cliente_servicio",
+            joinColumns = @JoinColumn(name = "cliente_id"),
+            inverseJoinColumns = @JoinColumn(name = "servicio_id"))
+    private List<Servicio> serviciosContratados = new ArrayList<>(); // Inicializa la lista directamente
+
+    // Constructor sin parámetros (necesario para JPA)
+    public Cliente() {
+    }
+
+    // Constructor con parámetros
+    public Cliente(long cuit, String email, String razonSocial, String nombre, String apellido) {
+        this.id = id;
+        this.cuit = cuit;
+        this.email = email;
+        this.razonSocial = razonSocial;
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
+
+    public void agregarServicio(Servicio servicio) {
+        serviciosContratados.add(servicio);
+        servicio.getClientes().add(this);
+        System.out.println("Servicio agregado a Cliente: " + this.id);
+    }
+
+
+
+}
+
+ /*@Entity
+@Table(name = "cliente")
+@Data
+@AllArgsConstructor
 @Setter
 public class Cliente {
     @Id
@@ -49,4 +95,4 @@ public class Cliente {
         //getServiciosContratados().add(new Servicio());
 
     }
-}
+}*/

@@ -17,9 +17,10 @@ public class ClienteService {
 
         this.clienteRepository = clienteRepository;
     }
-    public int guardarCliente(Cliente cliente) {
-        return clienteRepository.save(cliente).getId();
-
+    public void guardarCliente(Cliente cliente) {
+        System.out.println("Guardando cliente: " + cliente.getId());
+        clienteRepository.save(cliente);
+        System.out.println("Cliente guardado exitosamente");
     }
 
 
