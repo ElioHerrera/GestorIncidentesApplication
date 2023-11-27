@@ -67,14 +67,12 @@ public class Incidente {
         this.fechaIngreso = new Date(); // Establece la fecha de ingreso al momento de la creación
         this.fechaEstimadaResolucion = calcularFechaEstimadaResolucion(); // Calcula la fecha estimada de resolución
         this.fechaResolucion = null;
-        this.estado = devolverEstadoSegunFecha();
+        this.estado = EstadoEnum.EN_PROCESO;
         this.consideraciones = consideraciones;
     }
 
     public Incidente() {
     }
-
-
     private Date calcularFechaEstimadaResolucion() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
@@ -82,25 +80,14 @@ public class Incidente {
         return calendar.getTime();
     }
 
-    // CORREGIR MEDOTO 
     private EstadoEnum devolverEstadoSegunFecha() {
         Date fechaActual = new Date();
 
-        if (fechaEstimadaResolucion == null) {
-            // Si no hay fecha estimada, el estado es EN_PROCESO
-            return EstadoEnum.EN_PROCESO;
-        }
-
-        if (fechaEstimadaResolucion.before(fechaActual)) {
-            // Si la fecha estimada ha pasado, el estado es EN_PROCESO
-            return EstadoEnum.EN_PROCESO;
-        } else if (fechaResolucion != null && fechaResolucion.before(fechaActual)) {
-            // Si hay fecha de resolución y ha pasado, el estado es FINALIZADO
+        if (fechaResolucion.after(fechaActual)) {
             return EstadoEnum.FINALIZADO;
         }
 
-        // Si no se cumplen las condiciones anteriores, el estado es INCOMPLETO
-        return EstadoEnum.EN_PROCESO;
+        return estado;
     }
 
 
