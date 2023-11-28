@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class ConsultaIncidentes {
-
+/*
     public static void ConsultaMasIncidentes(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("incidentesapp"); // Nombre de la unidad de Persistencia?
         EntityManager em = emf.createEntityManager();
@@ -159,4 +159,6 @@ public class ConsultaIncidentes {
             }
         }
     }
+
+ */
 }

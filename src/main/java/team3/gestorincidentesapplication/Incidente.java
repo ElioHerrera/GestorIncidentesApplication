@@ -40,13 +40,56 @@ public class Incidente {
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     private Cliente cliente;
 
-    @ManyToOne
+
+
+    public Incidente(String titulo, String descripcion, String consideraciones) {
+        //this.id = id;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.fechaIngreso = new Date(); // Establece la fecha de ingreso al momento de la creación
+        this.fechaEstimadaResolucion = calcularFechaEstimadaResolucion(); // Calcula la fecha estimada de resolución
+        this.fechaResolucion = null;
+        this.estado = EstadoEnum.EN_PROCESO;
+        this.consideraciones = consideraciones;
+    }
+
+    public Incidente() {
+    }
+
+
+    private Date calcularFechaEstimadaResolucion() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DAY_OF_MONTH, 5);
+        return calendar.getTime();
+    }
+
+
+
+    private EstadoEnum devolverEstadoSegunFecha() {
+        Date fechaActual = new Date();
+
+        if (fechaResolucion.after(fechaActual)) {
+            return EstadoEnum.FINALIZADO;
+        }
+
+        return estado;
+    }
+
+
+
+
+
+}
+
+
+
+   /*
+
+       @ManyToOne
     @JoinColumn(name = "id_tecnico", referencedColumnName = "id")
     private Tecnico tecnico;
 
-    @ManyToOne
-    @JoinColumn(name = "id_servicio", referencedColumnName = "id")
-    private Servicio servicio;
 
     @ManyToOne
     @JoinColumn(name = "id_tipoProblema", referencedColumnName = "id")
@@ -58,9 +101,8 @@ public class Incidente {
 
     // Se supone que con esta relacion de Uno a muchos con problemas podiamos hacer la consigna 2
     // Alta de incidentes con problemas relacionados. Alta de incidentes con conjunto de problemas relacionados.
-    @OneToMany(mappedBy = "incidente", cascade = CascadeType.ALL);
-    private List<TipoProblema> tipoProblemas = new ArrayList<>();
 
+*/
 
     /*
 
@@ -83,39 +125,5 @@ public class Incidente {
         @JoinColumn(name = "id_especialidad", referencedColumnName = "id")
         private Especialidad especialidad;
     */
-    public Incidente(String titulo, String descripcion, String consideraciones) {
-        //this.id = id;
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.fechaIngreso = new Date(); // Establece la fecha de ingreso al momento de la creación
-        this.fechaEstimadaResolucion = calcularFechaEstimadaResolucion(); // Calcula la fecha estimada de resolución
-        this.fechaResolucion = null;
-        this.estado = EstadoEnum.EN_PROCESO;
-        this.consideraciones = consideraciones;
-    }
-
-    public Incidente() {
-    }
-    private Date calcularFechaEstimadaResolucion() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.add(Calendar.DAY_OF_MONTH, 5);
-        return calendar.getTime();
-    }
-
-    private EstadoEnum devolverEstadoSegunFecha() {
-        Date fechaActual = new Date();
-
-        if (fechaResolucion.after(fechaActual)) {
-            return EstadoEnum.FINALIZADO;
-        }
-
-        return estado;
-    }
-
-
-}
-
-
 
 

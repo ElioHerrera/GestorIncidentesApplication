@@ -24,7 +24,6 @@ public class Servicio {
 
     // Constructor con parámetros
     public Servicio(String nombre, String descripcion) {
-        //this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }

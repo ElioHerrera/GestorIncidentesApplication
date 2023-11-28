@@ -23,16 +23,14 @@ public class GestorIncidentesApplication {
 
     private final ClienteService clienteService;
     private final ServicioService servicioService;
-    private final TipoProblemaService tipoProblemaService;
     private final EspecialidadService especialidadService;
     private final TecnicoService tecnicoService;
     private final IncidenteService incidenteService;
 
     @Autowired
-    public GestorIncidentesApplication(ClienteService clienteService, ServicioService servicioService, TipoProblemaService tipoProblemaService, EspecialidadService especialidadService, TecnicoService tecnicoService, IncidenteService incidenteService) {
+    public GestorIncidentesApplication(ClienteService clienteService, ServicioService servicioService, EspecialidadService especialidadService, TecnicoService tecnicoService, IncidenteService incidenteService) {
         this.clienteService = clienteService;
         this.servicioService = servicioService;
-        this.tipoProblemaService = tipoProblemaService;
         this.especialidadService = especialidadService;
         this.tecnicoService = tecnicoService;
         this.incidenteService = incidenteService;
@@ -114,15 +112,21 @@ public class GestorIncidentesApplication {
             //cliente9.agregarIncidente(new Incidente("Incidente 4", "No Signal", "SS"));
             clienteService.guardarCliente(cliente9);
 
+            // Después de haber inyectado RelacionService donde sea necesario
+
+            System.out.println(".......clientes SAVE");
+
             Tecnico tecnico1 = new Tecnico("Tecnico 1", "el uno");
             Tecnico tecnico2 = new Tecnico("Tecnico 2", "francia");
             Tecnico tecnico3 = new Tecnico("Tecnico 3", "tres");
             Tecnico tecnico4 = new Tecnico("Tecnico 4", "cuatro");
             Tecnico tecnico5 = new Tecnico("Tecnico 5", "cinco");
 
+            System.out.println("tecnicos creados");
+
             tecnico1.agregarEspecialidad(new Especialidad("Especialidad 1","Descripcion 1"));
             tecnico1.agregarEspecialidad(new Especialidad("Especialidad 2","Descripcion 2"));
-            tecnico1.agregarIncidente(new Incidente());
+
             tecnicoService.guardarTecnico(tecnico1);
 
             tecnico2.agregarEspecialidad(new Especialidad("Especialidad 1","Descripcion 1"));
@@ -143,13 +147,30 @@ public class GestorIncidentesApplication {
             tecnico5.agregarEspecialidad(new Especialidad("Especialidad 4","Descripcion 4"));
             tecnicoService.guardarTecnico(tecnico5);
 
+            /*
+            MedioComunicacion medio1 = new MedioComunicacion(MedioEnum.WHATSAPP,"Whats App");
+            tecnico1.agregarMedio(medio1,"3413564545");
+            */
+
+        };
+    }
+
+}
+
+/*
+System.out.println("Se agregan especialidad y ");
             TipoProblema problema1 = new TipoProblema("Incidente 1",48,96);
             TipoProblema problema2 = new TipoProblema("Incidente 2",24,48);
             TipoProblema problema3 = new TipoProblema("Incidente 3",48,96);
             TipoProblema problema4 = new TipoProblema("Incidente 4",100,200);
 
-            problema1.agregarEspecialidad(new Especialidad("Especialidad 1","Descripcion 1"));
-            problema1.agregarIncidente(new Incidente());
+
+
+
+
+
+problema1.agregarEspecialidad(new Especialidad("Especialidad 1","Descripcion 1"));
+           // problema1.agregarIncidente(new Incidente());
             tipoProblemaService.guardarProblema(problema1);
 
             problema2.agregarEspecialidad(new Especialidad("Especialidad 1","Descripcion 1"));
@@ -164,14 +185,7 @@ public class GestorIncidentesApplication {
             problema4.agregarEspecialidad(new Especialidad("Especialidad 3","Descripcion 3"));
             tipoProblemaService.guardarProblema(problema4);
 
-
-
-
-        };
-    }
-}
-
-/* Metodos tentativos:
+            Metodos tentativos:
 Scanner sc = new Scanner(System.in);
             int opcion;
             do {

@@ -33,4 +33,8 @@ public class MedioComunicacion {
 
     public MedioComunicacion() {
     }
+
+    public void add(MedioComunicacion nuevoMedio) {
+
+    }
 }
