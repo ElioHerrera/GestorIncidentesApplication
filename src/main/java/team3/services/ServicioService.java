@@ -14,11 +14,11 @@ public class ServicioService {
     public ServicioService(ServicioRepository servicioRepository) {
         this.servicioRepository = servicioRepository;
     }
-/*
+
     // Método para guardar un servicio
     public void guardarServicio(Servicio servicio) {
 
         servicioRepository.save(servicio);
     }
-*/
+
 }

@@ -6,6 +6,8 @@ import team3.gestorincidentesapplication.Cliente;
 import team3.repositorys.IncidenteRepository;
 import team3.gestorincidentesapplication.Incidente;
 
+import java.util.List;
+
 
 @Service
 public class IncidenteService {
@@ -21,12 +23,15 @@ public class IncidenteService {
         incidenteRepository.save(incidente);
     }
 
-    /*
-    public void guardarIncidente(Incidente incidente) {
-        System.out.println("incidente guardado a cliente: " + incidente.getCliente());
-        incidenteRepository.save(incidente);
-        System.out.println("Incidente guardado exitosamente");
+
+    // Metodo consultar Todos los incidentes
+    public List<Incidente> obtenerTodosIncidentes() {
+        return incidenteRepository.findAll();
     }
 
-     */
+    public Incidente obtenerIncidentePorId(int incidenteId) {
+        return incidenteRepository.findById(incidenteId).orElse(null);
+    }
+
+
 }

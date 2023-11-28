@@ -31,8 +31,14 @@ public class Tecnico {
             inverseJoinColumns = @JoinColumn(name = "id_especialidad"))
     private List<Especialidad> especialidades = new ArrayList<>(); // Inicializa la lista directamente
 
+    /*
     @OneToMany(mappedBy = "tecnico", cascade = CascadeType.ALL)
     private List<Incidente> incidentes = new ArrayList<>();
+    */
+
+    @OneToMany(mappedBy = "tecnico", cascade = CascadeType.ALL)
+    private List<MedioComunicacion> preferido;
+
 
     @Override
     public String toString() {
@@ -62,52 +68,14 @@ public class Tecnico {
         especialidad.getTecnicos().add(this); // Agrega el tecnico a la lista de tecnicos de la especialidad
         System.out.println("Servicio " + especialidad.getNombre() + " agregado a Cliente: " + this.nombre);
     }
-    public void agregarIncidente(Incidente incidente) {
-        //incidente.actualizarEstadoSegunFecha(); // Actualizar estado antes de persistir
-        incidentes.add(incidente); // Agrega el incidente a la lista de incidentes del tecnic
-        incidente.setTecnico(this); // Aasocia el incidente con su único cliente
-        System.out.println("Incidente " + incidente.getTitulo() + " agregado a Cliente: " + this.nombre);
+
+
+    public void agregarMedio(MedioComunicacion medioComunicacion, String contacto) {
+        MedioComunicacion nuevoMedio = new MedioComunicacion();
+        medioComunicacion.add(nuevoMedio);
+        System.out.println("Nuevo medio de comunicacion agregado:" + this.nombre);
+
     }
 
 
-
 }
-
-
-
-
-/*package team3.gestorincidentesapplication;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-import javax.persistence.*;
-import java.util.List;
-
-
-@Entity
-@Table(name = "tecnico")
-@Data
-@AllArgsConstructor
-public class Tecnico {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    private String nombre;
-    private String apellido;
-
-    @ManyToMany
-    @JoinTable(
-            name = "tecnico_especialidad",
-            joinColumns = @JoinColumn(name = "id_tecnico"),
-            inverseJoinColumns = @JoinColumn(name = "id_especialidad"))
-    private List<Especialidad> especialidades;
-
-    @OneToMany(mappedBy = "tecnico")
-    private List<MedioComunicacion> mediosComunicacion;
-
-    public Tecnico(String nombre, String apellido) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-}}*/

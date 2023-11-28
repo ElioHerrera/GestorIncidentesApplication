@@ -19,15 +19,10 @@ public class Especialidad{
     private String nombre;
     private String descripcion;
 
-    @ManyToMany
-    @JoinTable(
-            name = "problema_especialidad",
-            joinColumns = @JoinColumn(name = "id_problema"),
-            inverseJoinColumns = @JoinColumn(name = "id_especialidad"))
+    @ManyToMany(mappedBy = "especialidades")
+    private List<Tecnico> tecnicos = new ArrayList<>();
 
-   /* @ManyToMany(mappedBy = "especialidades")*/
-    private List<Tecnico> tecnicos = new ArrayList<>(); // Inicializa la lista directamente
-    private List<TipoProblema> tipoProblemas = new ArrayList<>();
+
     public Especialidad(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
