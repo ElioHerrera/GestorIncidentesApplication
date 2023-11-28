@@ -1,14 +1,12 @@
 package team3.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import team3.gestorincidentesapplication.MedioComunicacion;
+import org.springframework.transaction.annotation.Transactional;
+import team3.gestorincidentesapplication.Especialidad;
 import team3.gestorincidentesapplication.Tecnico;
 import team3.repositorys.TecnicoRepository;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TecnicoService {
@@ -19,19 +17,32 @@ public class TecnicoService {
         this.tecnicoRepository = tecnicoRepository;
     }
 
-    // Ejemplo de método en el servicio para guardar un nuevo tecnico
     public void guardarTecnico(Tecnico tecnico) {
-
         tecnicoRepository.save(tecnico);
     }
 
+    @Transactional
     public List<Tecnico> obtenerTodosTecnicos() {
-        return tecnicoRepository.findAll();
+        List<Tecnico> tecnicos = tecnicoRepository.findAll();
+        System.out.println("------------------------------------------------");
+        System.out.println("           LISTA DE TÉCNICOS");
+        System.out.println("------------------------------------------------");
+        for (Tecnico tecnico : tecnicos) {
+            System.out.print("ID: " + tecnico.getId() + " ");
+            System.out.print("Nombre: " + tecnico.getNombre() + " ");
+            System.out.print("Apellido: " + tecnico.getApellido() + " \n");
+
+            tecnico.getEspecialidades().size();
+
+            System.out.println("-------------->   Especialidades:");
+            for (Especialidad especialidad : tecnico.getEspecialidades()) {
+                System.out.println("- " + especialidad.getNombre());
+            }
+            System.out.println("****************************");
+        }
+        return tecnicos;
     }
-
-    public Tecnico obtenerTecnicoPorId(int tecnicoId) {
-        return tecnicoRepository.findById(tecnicoId).orElse(null);
-    }
-
-
 }
+
+
+
