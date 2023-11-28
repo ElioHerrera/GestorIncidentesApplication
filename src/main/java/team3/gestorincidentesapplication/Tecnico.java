@@ -64,8 +64,8 @@ public class Tecnico {
     }
 
     public void agregarEspecialidad(Especialidad especialidad) {
-        especialidades.add(especialidad); // Agrega la especialidad a la lista del tecnico
-        especialidad.getTecnicos().add(this); // Agrega el tecnico a la lista de tecnicos de la especialidad
+        this.especialidades.add(especialidad);
+        especialidad.getTecnicos().add(this);
         System.out.println("Servicio " + especialidad.getNombre() + " agregado a Cliente: " + this.nombre);
     }
 
@@ -75,6 +75,9 @@ public class Tecnico {
         medioComunicacion.add(nuevoMedio);
         System.out.println("Nuevo medio de comunicacion agregado:" + this.nombre);
 
+    }
+    public List<Especialidad> getEspecialidades() {
+        return especialidades;
     }
 
 
